@@ -91,7 +91,7 @@ export async function POST(request: Request) {
                       type: 'text',
                       text: `注文情報:\n注文番号: ${orderInfo.orderId}\n注文日: ${orderInfo.orderDate}\n商品: ${orderInfo.menuItems.join(', ')}\nステータス: ${orderInfo.status}`
                     }]);
-                  } catch (error) {
+                  } catch {
                     await replyMessage(messageEvent.replyToken, [{
                       type: 'text',
                       text: '注文情報の取得に失敗しました。しばらく経ってから再度お試しください。'
