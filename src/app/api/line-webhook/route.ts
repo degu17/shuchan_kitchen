@@ -1,10 +1,14 @@
-import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { verifyLineSignature, LineWebhookBody, LineMessageEvent } from '@/lib/line';
 
 const CHANNEL_ACCESS_TOKEN = '3ATEVHVRENFgCAu+HWty3SDCQvGR1oRvF6u2yTyVUWoxSFnutxfSfICEIBChr8iJGqmFd0V4YWA4qTa/fLx5nGH+yWv27of4C5RbcmPF8tf6pv/sUAc0DtXA8x3p/DWzbIQzm3OlbTHWL7jD8TM+egdB04t89/1O/w1cDnyilFU=';
 
-async function replyMessage(replyToken: string, messages: any[]) {
+type LineMessage = {
+  type: string;
+  text: string;
+};
+
+async function replyMessage(replyToken: string, messages: LineMessage[]) {
   const response = await fetch('https://api.line.me/v2/bot/message/reply', {
     method: 'POST',
     headers: {
