@@ -126,8 +126,8 @@ export async function POST(request: Request) {
 
     // 常に200 OKを返す
     return new Response('OK', { status: 200 });
-  } catch (error) {
-    console.error('Webhook error:', error);
+  } catch (_error) {
+    console.error('Webhook error:', _error);
     // エラーが発生しても200を返す
     return new Response('OK', { status: 200 });
   }
