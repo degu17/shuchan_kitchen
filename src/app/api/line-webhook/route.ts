@@ -66,25 +66,17 @@ export async function POST(request: Request) {
                     text: '注文を受け付けました。\n以下から希望の日時を選択してください。'
                   }]);
                   break;
+                  //これはサンプル　こんな感じで特定のメッセージに対するアクションを作る
                 
-                case 'メニューをリクエストする':
-                  await replyMessage(messageEvent.replyToken, [{
-                    type: 'text',
-                    text: 'メニューのリクエストを受け付けました。\nどのようなメニューをご希望ですか？'
-                  }]);
-                  break;
+                case '使い方':
+                    break;
                 
-                case '予約をキャンセルする':
-                  await replyMessage(messageEvent.replyToken, [{
-                    type: 'text',
-                    text: 'キャンセルを受け付けました。\nキャンセルする予約の日時を教えてください。'
-                  }]);
-                  break;
+                
                 
                 default:
                   await replyMessage(messageEvent.replyToken, [{
                     type: 'text',
-                    text: 'メニューから選択してください。'
+                    text: '個別メッセージを受付ました。柊人ママに送信されます。'
                   }]);
                   break;
               }
@@ -94,7 +86,7 @@ export async function POST(request: Request) {
           case 'follow':
             await replyMessage(event.replyToken, [{
               type: 'text',
-              text: 'しゅうちゃん食堂へようこそ！\n予約やメニューのリクエストができます。'
+              text: 'しゅうちゃん食堂へようこそ！下記のメニューから選んでください。'
             }]);
             break;
         }
