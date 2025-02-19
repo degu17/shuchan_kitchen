@@ -5,7 +5,7 @@ const USER_ID = 'Ub9df7c953300b31d6338c5f6f93abb77';
 
 export async function POST(request: Request) {
   try {
-    const { messageType = 'menu' } = await request.json();
+    await request.json();
 
     const message = {
       to: USER_ID,

@@ -14,7 +14,7 @@ export default function SendLineMessage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ messageType: 'menu' }),
+        body: JSON.stringify({}),
       });
 
       const data = await response.json();
