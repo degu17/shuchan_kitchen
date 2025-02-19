@@ -29,6 +29,19 @@ async function replyMessage(replyToken: string, messages: LineMessage[]) {
   return response.json();
 }
 
+// 仮のオーダー取得関数
+async function fetchOrders() {
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+  const data = await response.json();
+  // JSONPlaceholderのデータを注文情報形式に変換
+  return {
+    orderId: data.id,
+    orderDate: '2024-03-20',
+    menuItems: ['唐揚げ弁当', 'みそ汁'],
+    status: '準備中'
+  };
+}
+
 // POSTメソッドのみを許可
 export async function POST(request: Request) {
   try {
@@ -71,7 +84,20 @@ export async function POST(request: Request) {
                 case '使い方':
                     break;
                 
-                
+                case '注文の確認':
+                  try {
+                    const orderInfo = await fetchOrders();
+                    await replyMessage(messageEvent.replyToken, [{
+                      type: 'text',
+                      text: `注文情報:\n注文番号: ${orderInfo.orderId}\n注文日: ${orderInfo.orderDate}\n商品: ${orderInfo.menuItems.join(', ')}\nステータス: ${orderInfo.status}`
+                    }]);
+                  } catch (error) {
+                    await replyMessage(messageEvent.replyToken, [{
+                      type: 'text',
+                      text: '注文情報の取得に失敗しました。しばらく経ってから再度お試しください。'
+                    }]);
+                  }
+                  break;
                 
                 default:
                   await replyMessage(messageEvent.replyToken, [{
@@ -83,12 +109,13 @@ export async function POST(request: Request) {
             }
             break;
 
-          case 'follow':
-            await replyMessage(event.replyToken, [{
-              type: 'text',
-              text: 'しゅうちゃん食堂へようこそ！下記のメニューから選んでください。'
-            }]);
-            break;
+          //case 'follow':
+            //await replyMessage(event.replyToken, [{
+              //type: 'text',
+              //text: 'しゅうちゃん食堂へようこそ！下記のメニューから選んでください。'
+            //}]);
+            //break; 
+            //これはフォローしたときのメッセージ例。今回はLINE側で作成
         }
       } catch (eventError) {
         console.error('Event processing error:', eventError);
