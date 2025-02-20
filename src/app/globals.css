@@ -70,3 +70,66 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* MenuSelector Styles */
+@layer components {
+  .menu-selector-container {
+    @apply bg-white p-6 rounded-lg shadow-md;
+  }
+
+  .menu-selector-title {
+    @apply text-xl font-bold mb-4;
+  }
+
+  .menu-item {
+    @apply p-4 border rounded-lg;
+  }
+
+  .menu-item-selected {
+    @apply bg-gray-100 border-gray-300 cursor-not-allowed;
+  }
+
+  .menu-item-unselected {
+    @apply border-blue-200 hover:border-blue-500 cursor-pointer;
+  }
+
+  .menu-item-content {
+    @apply flex justify-between items-center;
+  }
+
+  .menu-item-info {
+    @apply font-bold;
+  }
+
+  .menu-item-description {
+    @apply text-sm text-gray-600;
+  }
+
+  .menu-item-price {
+    @apply font-bold;
+  }
+
+  .menu-item-selected-label {
+    @apply text-sm text-green-600;
+  }
+
+  .selected-menu-summary {
+    @apply mt-4 p-4 bg-blue-50 rounded-lg;
+  }
+
+  .selected-menu-title {
+    @apply font-bold mb-2;
+  }
+
+  .selected-menu-list {
+    @apply list-disc list-inside;
+  }
+
+  .selected-menu-item {
+    @apply text-gray-700;
+  }
+
+  .selected-menu-total {
+    @apply mt-2 font-bold text-right;
+  }
+}
