@@ -1,33 +1,25 @@
-interface AuthButtonProps {
-  userType: "cook" | "eater" | null
-  setUserType: (type: "cook" | "eater" | null) => void
-}
+"use client"
 
-export default function AuthButton({ userType, setUserType }: AuthButtonProps) {
-  const handleAuth = (type: "cook" | "eater") => {
-    setUserType(type)
-  }
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs"
 
-  const handleLogout = () => {
-    setUserType(null)
-  }
-
-  if (userType) {
-    return (
-      <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded">
-        ログアウト
-      </button>
-    )
-  }
+export default function AuthButton() {
+  const { isSignedIn } = useUser()
 
   return (
-    <div>
-      <button onClick={() => handleAuth("cook")} className="bg-yellow-500 text-white px-4 py-2 rounded mr-2">
-        作る側としてログイン
-      </button>
-      <button onClick={() => handleAuth("eater")} className="bg-green-500 text-white px-4 py-2 rounded">
-        食べる側としてログイン
-      </button>
+    <div className="flex items-center gap-4">
+      {isSignedIn ? (
+        <SignOutButton>
+          <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors">
+            ログアウト
+          </button>
+        </SignOutButton>
+      ) : (
+        <SignInButton>
+          <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors">
+            ログイン
+          </button>
+        </SignInButton>
+      )}
     </div>
   )
 }
